@@ -62,6 +62,8 @@ const App = () => {
   const [inputStatus,setInputStatus] = useState('');
   const [inputArray,setInputArray] = useState([]);
 
+  // This is good indentation
+
   const handleTextChange = (event) =>{
     setInputTask(event.target.value);
   };
