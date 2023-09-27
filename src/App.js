@@ -51,6 +51,7 @@
 
 import React, { useState } from 'react';
 import "./components/App.css";
+import EditForm from "./components/EditForm";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -60,6 +61,7 @@ const App = () => {
   const [inputTask,setInputTask] = useState('');
   const [inputDue,setInputDue] = useState('');
   const [inputStatus,setInputStatus] = useState('');
+  // const [visibility,setVisibility] = useState('');
   const [inputArray,setInputArray] = useState([]);
 
   // This is good indentation
@@ -104,6 +106,7 @@ const App = () => {
     setInputStatus('');
   };
 
+
   const renderRecord = inputArray.map((record)=>{
     return(
       <tr>
@@ -112,13 +115,11 @@ const App = () => {
         <td>{record.status}</td> 
         <td>
         <span class="material-symbols-outlined" onClick={()=> removeItem(record.id) }>cancel</span>
-          {/* <span class="material-symbols-outlined" onClick={()=> editItem(record.id)}>edit</span> */}
+          <span class="material-symbols-outlined">edit</span>
         </td>
       </tr>
     )
   });
-
-
 
 
   return (
@@ -130,39 +131,38 @@ const App = () => {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Document</title>
    </head>
-   <body>
-   <div> 
+<body>
+  <div className='main-container'> 
 
-<form onSubmit={handleSubmit}>
-    Input Name:
-    <input type="text" onChange={handleTextChange} value={inputTask} placeholder='task name' />
-    Due date:
-    <input type="text" onChange={handleDueChange} value={inputDue} placeholder='due date' />
-    Status:
-    <input onChange={handlestatusChange} value={inputStatus} type="text" placeholder='status' />
-  <button type='submit'>Submit</button>
-</form>
+          <form onSubmit={handleSubmit}>
+              Input Name:
+              <input type="text" onChange={handleTextChange} value={inputTask} placeholder='task name' />
+              Due date:
+              <input type="text" onChange={handleDueChange} value={inputDue} placeholder='due date' />
+              Status:
+              <input onChange={handlestatusChange} value={inputStatus} type="text" placeholder='status' />
+            <button type='submit'>Submit</button>
+          </form>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead> 
 
-<table>
-    <thead>
-        <tr>
-            <th>Task Name</th>
-            <th>Due Date</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead> 
-
-    <tbody>
-      {renderRecord}
-     
-    </tbody>
-
-</table>
-</div>
-    
-   </body>
+            <tbody>
+              {renderRecord} 
+            </tbody>
+        </table>
+      <div className='EditForm'>
+        <EditForm/>
+      </div>
+  </div>
+</body>
    </html>
 
   )
