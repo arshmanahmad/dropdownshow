@@ -61,7 +61,7 @@ const App = () => {
   const [inputTask,setInputTask] = useState('');
   const [inputDue,setInputDue] = useState('');
   const [inputStatus,setInputStatus] = useState('');
-  // const [visibility,setVisibility] = useState('');
+  const [visibility,setVisibility] = useState(true);
   const [inputArray,setInputArray] = useState([]);
 
   // This is good indentation
@@ -105,7 +105,10 @@ const App = () => {
     setInputDue('');
     setInputStatus('');
   };
+  const handleQuerySelector = () =>{
+    setVisibility(!visibility);
 
+  }
 
   const renderRecord = inputArray.map((record)=>{
     return(
@@ -115,7 +118,7 @@ const App = () => {
         <td>{record.status}</td> 
         <td>
         <span class="material-symbols-outlined" onClick={()=> removeItem(record.id) }>cancel</span>
-          <span class="material-symbols-outlined">edit</span>
+          <span class="material-symbols-outlined" onClick={handleQuerySelector}>edit</span>
         </td>
       </tr>
     )
@@ -159,7 +162,7 @@ const App = () => {
             </tbody>
         </table>
       <div className='EditForm'>
-        <EditForm/>
+        {visibility || <EditForm/>}
       </div>
   </div>
 </body>
