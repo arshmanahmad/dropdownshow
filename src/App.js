@@ -52,6 +52,8 @@
 import React, { useState } from 'react';
 import "./components/App.css";
 import EditForm from "./components/EditForm";
+import AddFaqs from './components/AddFaqs';
+import AddFaqsTwo from './components/AddFaqsTwo';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -62,9 +64,10 @@ const App = () => {
   const [inputDue,setInputDue] = useState('');
   const [inputStatus,setInputStatus] = useState('');
   const [visibility,setVisibility] = useState(true);
+  const [addFaqs,setAddFaqs] = useState(false);
+  const [addFaqsTwo,setAddFaqsTwo] = useState(true);
   const [inputArray,setInputArray] = useState([]);
 
-  // This is good indentation
 
   const handleTextChange = (event) =>{
     setInputTask(event.target.value);
@@ -75,15 +78,6 @@ const App = () => {
   const handlestatusChange = (event) =>{
     setInputStatus(event.target.value);
   };
-  
-  // setInputArray([
-  //   ...inputArray,
-  //   {
-  //     taskName:inputTask,
-  //    dueDate:inputDue,
-  //    status:inputStatus,
-  //   }
-  // ])
   const takeInput = () =>{
     const newItem = {
       id: new Date().getTime(),
@@ -109,7 +103,12 @@ const App = () => {
     setVisibility(!visibility);
 
   }
-
+  const handleQueryToggle = () =>{
+    setAddFaqs(!addFaqs);
+  }
+  const handleQueryTwoToggle = () =>{
+    setAddFaqsTwo(!addFaqsTwo);
+  }
   const renderRecord = inputArray.map((record)=>{
     return(
       <tr>
@@ -123,6 +122,7 @@ const App = () => {
       </tr>
     )
   });
+
 
 
   return (
@@ -163,6 +163,13 @@ const App = () => {
         </table>
       <div className='EditForm'>
         {visibility || <EditForm/>}
+      </div>
+      <div>
+        <h1>Add FAQs</h1>
+        <p>What is the main name of this website? <span class="material-symbols-outlined" onClick={handleQueryToggle}>expand_more</span></p>
+        {addFaqs && <AddFaqs/>}
+        <p>What is the purpose of this website?<span class="material-symbols-outlined" onClick={handleQueryTwoToggle}>expand_more</span></p>
+        {addFaqsTwo || <AddFaqsTwo />}
       </div>
   </div>
 </body>
