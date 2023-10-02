@@ -67,6 +67,11 @@ const App = () => {
   const [addFaqs,setAddFaqs] = useState(false);
   const [addFaqsTwo,setAddFaqsTwo] = useState(true);
   const [inputArray,setInputArray] = useState([]);
+  const [receiveData,setReceiveData] = useState('');
+
+  const receiveAllData = (data) =>{
+    setReceiveData(data);
+  }
 
 
   const handleTextChange = (event) =>{
@@ -170,6 +175,10 @@ const App = () => {
         {addFaqs && <AddFaqs/>}
         <p>What is the purpose of this website?<span class="material-symbols-outlined" onClick={handleQueryTwoToggle}>expand_more</span></p>
         {addFaqsTwo || <AddFaqsTwo />}
+      </div>
+      <div>
+        <EditForm nameValue={receiveAllData}/>
+        <p>{receiveData}</p>
       </div>
   </div>
 </body>
