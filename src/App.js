@@ -68,9 +68,20 @@ const App = () => {
   const [addFaqsTwo,setAddFaqsTwo] = useState(true);
   const [inputArray,setInputArray] = useState([]);
   const [receiveData,setReceiveData] = useState('');
+  const [receiveDataDate,setReceiveDataDate] = useState('');
+  const [receiveDataStatus,setReceiveDataStatus] = useState('');
 
-  const receiveAllData = (data) =>{
-    setReceiveData(data);
+  const receiveName = (nameValue) =>{
+    setReceiveData(nameValue);
+    console.log(receiveData);
+  }
+  const receiveDate = (dateValue) =>{
+    setReceiveDataDate(dateValue);
+    console.log(receiveDataDate);
+  }
+  const receiveStatus = (statusValue) =>{
+    setReceiveDataStatus(statusValue);
+    console.log(receiveDataStatus);
   }
 
 
@@ -105,6 +116,7 @@ const App = () => {
     setInputStatus('');
   };
   const handleQuerySelector = () =>{
+
     setVisibility(!visibility);
 
   }
@@ -169,6 +181,7 @@ const App = () => {
       <div className='EditForm'>
         {visibility || <EditForm/>}
       </div>
+     
       <div>
         <h1>Add FAQs</h1>
         <p>What is the main name of this website? <span class="material-symbols-outlined" onClick={handleQueryToggle}>expand_more</span></p>
@@ -177,9 +190,11 @@ const App = () => {
         {addFaqsTwo || <AddFaqsTwo />}
       </div>
       <div>
-        <EditForm nameValue={receiveAllData}/>
         <p>{receiveData}</p>
-      </div>
+        <p>{receiveDataDate}</p>
+        <p>{receiveDataStatus}</p>
+
+       </div>
   </div>
 </body>
    </html>

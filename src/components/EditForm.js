@@ -3,11 +3,11 @@ import './EditForm.css';
 import {useState} from 'react';
 
 
-const EditForm = ({nameValue}) => {
+const EditForm = ({nameValue,dateValue,statusValue}) => {
   const [taskName,setTaskName] = useState('');
   const [taskDate,setTaskDate] = useState('');
   const [taskStatus,setTaskStatus] = useState('');
-  // {nameGetter,dateGetter,statusGetter}
+  const [isFormVisible,setIsFormVisible]= useState(true);
   
   const handleNameChange = (event) =>{
     setTaskName(event.target.value);
@@ -21,21 +21,29 @@ const EditForm = ({nameValue}) => {
   const handleSubmit = (event) =>{
     event.preventDefault();
     nameValue(taskName);
-    // dateValue(taskDate);
-    // statusValue(taskStatus);
+    dateValue(taskDate);
+    statusValue(taskStatus);
+    setIsFormVisible(false);
+
   }
+ 
   return (
-    <div className='EditForm2'>
-      <form className='main-form'  onSubmit={handleSubmit}>
-        Input Name:
-        <input type="text" nameGetter={nameValue} value={taskName} placeholder='task name' onChange={handleNameChange} />
-        Due date:
-        <input type="text" value={taskDate} placeholder='due date' onChange={handleDateChange} />
-        Status:
-        <input type="text" value={taskStatus} placeholder='status' onChange={handleStatusChange} />
-        <button type='submit'>Submit</button>
-     </form>
-    </div>
+    <div>
+      {isFormVisible ? (<div className='EditForm2'>
+        <form className='main-form'  onSubmit={handleSubmit} >
+            Input Name:
+            <input type="text" nameGetter={nameValue} value={taskName} placeholder='task name' onChange={handleNameChange} />
+            Due date: 
+            <input type="text" value={taskDate} dateGetter={dateValue} placeholder='due date' onChange={handleDateChange} />
+            Status:
+            <input type="text" statusGetter={statusValue} value={taskStatus} placeholder='status' onChange={handleStatusChange} />
+            <button type='submit'>Submit</button>
+        </form>
+      </div>)
+      :(<p>Thankyou for submitting the form.</p>)
+     }
+  </div>
+
   )
 }
 
