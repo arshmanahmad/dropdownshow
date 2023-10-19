@@ -2,7 +2,7 @@ import React from 'react';
 import {useState} from 'react';
 import './HardTable.css';
 
-const HardTable = () => {
+const HardTable = ({item}) => {
 
   return (
     <div>
@@ -28,6 +28,7 @@ const HardTable = () => {
                     <td>Junior-developer</td>
                     <td>BSCS</td>
                 </tr>
+      
             </tbody>
       </table>
     </div>
