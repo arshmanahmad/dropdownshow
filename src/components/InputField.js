@@ -11,7 +11,9 @@ const InputField = ({valueGetter}) => {
     const handleChange = (event,setter) =>{
         setter(event.target.value);
       }
+    const id = Math.round(Math.random() * 9999);
     const data={
+      id,
       name,
       skill,
       email,

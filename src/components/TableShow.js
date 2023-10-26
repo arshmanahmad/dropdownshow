@@ -1,14 +1,17 @@
 import React from 'react';
 import './TableShow.css';
+import {useState} from 'react';
 
 const TableShow = ({values}) => {
-    const handleCloseClick = (id) =>{
-        values.filter((item)=>{
-            return item.id !== id;
-        })
+    const[value,setValue] = useState(values);
+    const handleCloseClick = (rowToRemove) =>{
+        const updatedTable = value.filter((row)=>{
+            return rowToRemove !== row.id;
+        });
+        setValue(updatedTable);
     }
     return (
-    <div>
+        <div>
         <table>
             <thead>
                 <tr>
@@ -21,15 +24,14 @@ const TableShow = ({values}) => {
             </thead>
             <tbody>
                 {
-                    values && values.map((item,id)=>{
-                        id = Math.floor(Math.random()*9999);
+                    values && values.map((item)=>{
                         return(
-                            <tr>
+                            <tr key={item.id}>
                                 <td>{item.name}</td>
                                 <td>{item.skill}</td>
                                 <td>{item.email}</td>
                                 <td>{item.education}</td>
-                                <td><span class="material-symbols-outlined" onClick={handleCloseClick}>close</span><span class="material-symbols-outlined">edit</span>
+                                <td><span class="material-symbols-outlined" onClick={()=> handleCloseClick(item.id)}>close</span><span class="material-symbols-outlined">edit</span>
                                 </td>
                             </tr>
                         )
